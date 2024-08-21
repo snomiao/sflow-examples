@@ -556,10 +556,10 @@ console.log("🚀", "Done");
 
 ## Contribution
 
-1. All PR's welcome! Press `.` in the example repo, and edit as you want, then create 
+1. All PR's and issues welcome! Press `.` in the example repo, and edit as you want, then create 
 
 Try to create your first PR here! https://github.dev/snomiao/sflow-examples
 
-2. Join sflow Community (WIP)
+2. Join sflow Community by Post Comments here:
 
-
+- [Welcome to sflow Discussions! · snomiao/sflow · Discussion #2]( https://github.com/snomiao/sflow/discussions/2 )
