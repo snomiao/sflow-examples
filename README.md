@@ -618,7 +618,7 @@ async function AFTER() {
   console.log(result);
 }
 
-// await BEFORE();
+await BEFORE();
 await AFTER();
 ```
 
