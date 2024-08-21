@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "release": "vercel --prod"
+    "release": "bun x vercel --prod"
   },
   "dependencies": {
     "@types/react-syntax-highlighter": "^15.5.13",
