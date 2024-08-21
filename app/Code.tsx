@@ -18,7 +18,7 @@ export default function Code({
   useEffect(() => {
     //
   }, [children]);
-  const runable = !children.match("sleep-promise|sflow/") && language.match(/typescript|javascript/i);
+  const runable = !children.match("sleep-promise|sflow/|WIP") && language.match(/typescript|javascript/i);
   return (
     <div className="flex flex-col gap-4">
       <ReactHighlightSyntax
@@ -70,7 +70,7 @@ export default function Code({
       {!!output.length && (
         <div>
           Outputs
-          <pre className="bg-gray-100 p-4">{output.join("\n")}</pre>
+          <pre className="bg-gray-100 p-4 max-w-[90vw] break-all whitespace-pre-wrap">{output.join("\n")}</pre>
         </div>
       )}
     </div>

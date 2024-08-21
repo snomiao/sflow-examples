@@ -575,15 +575,51 @@ async function run() {
 }
 
 await run();
-// "stage 1 - 2"    
-// "stage 1 - 4"    
-// "stage 1 - 6"    
+// "stage 1 - 2"
+// "stage 1 - 4"
+// "stage 1 - 6"
 // "stage 2 - 6"    // 2, 4 is filtered out in stage 2
-// "stage 1 - 8"    
+// "stage 1 - 8"
 // "stage 3 - 6"    // 0+6
-// "stage 2 - 8"    
+// "stage 2 - 8"
 // "stage 3 - 14"   // 0+6+8
 // [  6,  14  ]     // results
+```
+
+## Un-Nest Promises
+
+```typescript
+import { sflow } from "sflow";
+
+async function BEFORE() {
+  const url =
+    "/music.md";
+  // need 4 awaits, 2 extra variables, and fetching is not start by parallel
+  let result1 = (await (await fetch(url)).text()).replace(/#.*/gm, "");
+  let result2 = (await (await fetch(url)).text()).replace(/#.*/gm, "");
+  const result = result1 + "\n" + result2;
+
+  // and it would be even more ugly if you try rewrite it with Promise.all(...)
+
+  console.log(result);
+}
+
+async function AFTER() {
+  // WIP
+  const url =
+    "/music.md";
+  // need only 1 awaits, reuseable replace logic
+  let result = await sflow(fetch(url), fetch(url))
+    .map((e) => e.text())
+    .replace(/#.*/gm, "")
+    .join("\n")
+    .text();
+
+  console.log(result);
+}
+
+// await BEFORE();
+await AFTER();
 ```
 
 ## Contribution
