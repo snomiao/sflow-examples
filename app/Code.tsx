@@ -14,7 +14,7 @@ export default function Code({
   language: string;
   children: string;
 }) {
-  const [output, setOutput] = useState("");
+  const [output, setOutput] = useState<string[]>([]);
   useEffect(() => {
     //
   }, [children]);
@@ -34,11 +34,11 @@ export default function Code({
         ) : (
           <button
             onClick={() => {
-            //   setOutput("");
-            //   const consoleLog = globalThis.console.log;
-            //   globalThis.console.log = (...args) => {
-            //     setOutput((output) => output + args.join(" ") + "\n");
-            //   };
+              setOutput([]);
+              const consoleLog = globalThis.console.log;
+              globalThis.console.log = (...args) => {
+                setOutput((output) => [...output, args.map(e=> JSON.stringify(e, null, 2)).join(" ")]);
+              };
               const code = children
                 // .replace(/console.log\((.*)\)/g, 'console.log("🚀", $1)')
                 // wrap imports with jsdelivr
@@ -48,13 +48,11 @@ export default function Code({
                 );
 
               eval(`
-(async function() {
-    console.log("🚀", "Running code...");
-    
+(async function() {    
     ${code}
 })()
 `).finally(() => {
-                // globalThis.console.log = consoleLog;
+                globalThis.console.log = consoleLog;
               });
             }}
             className="bg-blue-500 text-white px-4 py-2 rounded-md"
@@ -63,10 +61,10 @@ export default function Code({
           </button>
         )}
       </div>
-      {!!output && (
+      {!!output.length && (
         <div>
           Outputs
-          <pre className="bg-gray-100 p-4">{output}</pre>
+          <pre className="bg-gray-100 p-4">{output.join('\n')}</pre>
         </div>
       )}
     </div>

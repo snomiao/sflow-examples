@@ -20,7 +20,9 @@ async function example1() {
   console.log(result); // Outputs: [8, 10, 12]
 }
 
-example1();
+await example1();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 2: Chunking and Buffering
@@ -38,7 +40,9 @@ async function example2() {
   console.log(result); // Outputs: [[1, 2, 3], [4, 5, 6], [7, 8]]
 }
 
-example2();
+await example2();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 3: Debounce and Throttle
@@ -60,7 +64,9 @@ async function example3() {
   console.log(result); // Outputs: [2, 4]
 }
 
-example3();
+await example3();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 4: Merging Multiple Streams
@@ -82,7 +88,9 @@ async function example4() {
   console.log(result); // Outputs: [1, 2, 3, 4, 5, 6]
 }
 
-example4();
+await example4();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 5: CSV Processing
@@ -106,7 +114,9 @@ async function example5() {
   console.log(result); // Outputs formatted CSV with modified records
 }
 
-example5();
+await example5();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 6: Unwinding Nested Arrays
@@ -138,7 +148,9 @@ async function example6() {
   // ]
 }
 
-example6();
+await example6();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 7: Stream Concurrency with pMap
@@ -161,7 +173,9 @@ async function example7() {
   console.log(result); // Outputs: [2, 4, 6, 8]
 }
 
-example7();
+await example7();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 8: Reducing and Emitting Intermediate States
@@ -186,7 +200,9 @@ async function example8() {
   console.log(result); // Outputs: [1, 3, 6, 10]
 }
 
-example8();
+await example8();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 9: Line-based Stream Processing
@@ -210,7 +226,9 @@ async function example9() {
   console.log(result); // Outputs: LINE1\nLINE2\nLINE3
 }
 
-example9();
+await example9();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 10: Handling Cache with Keyv
@@ -241,7 +259,9 @@ async function example10() {
   console.log(result); // Output: [1, 2, 3, 4, 5]
 }
 
-example10();
+await example10();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 11: Aggregating by Key
@@ -278,7 +298,9 @@ async function example11() {
   // ]
 }
 
-example11();
+await example11();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 12: Stream Vector
@@ -300,7 +322,9 @@ async function example12() {
   console.log(result); // Outputs: [2, 4, 6, 8, 10]
 }
 
-example12();
+await example12();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 13: Distinct Streams and Combining into Response
@@ -326,7 +350,9 @@ async function example13() {
   console.log(result); // Outputs: [1, 4, 2, 5, 3, 6]
 }
 
-example13();
+await example13();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 14: Conditional Chunking
@@ -349,7 +375,9 @@ async function example14() {
   console.log(result); // Outputs: ["a,b,c", "\n", "1,2,3", "\n", "d,s,f"]
 }
 
-example14();
+await example14();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 15: Custom Reducer
@@ -376,7 +404,9 @@ async function example15() {
   console.log(result); // Outputs: [2, 6, 12, 20, 30]
 }
 
-example15();
+await example15();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 16: Stream Async Operation
@@ -401,7 +431,9 @@ async function example16() {
   console.log(result); // Outputs: [2, 4, 6, 8]
 }
 
-example16();
+await example16();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 17: XSV Parsing and Formatting
@@ -425,7 +457,9 @@ async function example17() {
   console.log(result); // Outputs formatted TSV with updated ages
 }
 
-example17();
+await example17();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 18: Stream Error Handling
@@ -453,7 +487,9 @@ async function example18() {
   console.log(result); // Outputs: [2, 4]
 }
 
-example18();
+await example18();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 19: Stream Buffering with Interval
@@ -475,7 +511,9 @@ async function example19() {
   console.log(result); // Outputs: [[1, 2], [3, 4]]
 }
 
-example19();
+await example19();
+
+console.log("🚀", "Done");
 ```
 
 ## Example 20: Using TransformStream for Custom Transformations
@@ -500,5 +538,7 @@ async function example20() {
   console.log(result); // Outputs: ["HELLO", "WORLD"]
 }
 
-example20();
+await example20();
+
+console.log("🚀", "Done");
 ```
