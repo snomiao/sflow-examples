@@ -17,6 +17,15 @@ export default async function Home() {
             h3: ({ node, children }) => (
               <h3 className="text-2xl font-bold mt-8">{children}</h3>
             ),
+            a: ({ node, children, href }) => (
+              <a
+                className="text-blue-500 underline"
+                href={href as string}
+                target="_blank"
+              >
+                {children}
+              </a>
+            ),
             code: ({ node, className, children, ...props }) => {
               const match = /language-(\w+)/.exec(className || "");
               return match ? (
