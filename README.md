@@ -1,6 +1,16 @@
-# sflow Examples and Use Cases
+# sflow online Examples and Use Cases
 
 This document provides various examples and use cases to illustrate the features and capabilities of the sflow library.
+
+https://sflow-examples.vercel.app/
+
+- [sflow - npm]( https://www.npmjs.com/package/sflow )
+
+## sflow Installlation
+
+```bash
+npm i sflow
+```
 
 ## Example 1: Basic Stream Transformation
 
@@ -51,7 +61,7 @@ Debounce and throttle a stream of events.
 
 ```typescript
 import { sflow } from "sflow";
-import sleep from 'sleep-promise';
+const sleep = (ms) => new Promise(r=>setTimeout(r,ms))
 
 async function example3() {
   const result = await sflow([1, 2, 3, 4, 5])
@@ -159,7 +169,7 @@ Use `pMap` for processing stream items concurrently.
 
 ```typescript
 import { sflow } from "sflow";
-import sleep from 'sleep-promise';
+const sleep = (ms) => new Promise(r=>setTimeout(r,ms))
 
 async function example7() {
   const result = await sflow([1, 2, 3, 4])
@@ -415,7 +425,7 @@ Hold sequential waiting on async operation in stream.
 
 ```typescript
 import { sflow } from "sflow";
-import sleep from 'sleep-promise';
+const sleep = (ms) => new Promise(r=>setTimeout(r,ms))
 
 async function example16() {
   const data = [1, 2, 3, 4];
@@ -499,7 +509,7 @@ Buffer stream items within a time interval.
 ```typescript
 import { sflow } from "sflow";
 import { chunkIntervals } from "sflow/chunkIntervals";
-import sleep from 'sleep-promise';
+const sleep = (ms) => new Promise(r=>setTimeout(r,ms))
 
 async function example19() {
   const result = await sflow([1, 2, 3, 4])
@@ -542,3 +552,14 @@ await example20();
 
 console.log("🚀", "Done");
 ```
+
+
+## Contribution
+
+1. All PR's welcome! Press `.` in the example repo, and edit as you want, then create 
+
+Try to create your first PR here! https://github.dev/snomiao/sflow-examples
+
+2. Join sflow Community (WIP)
+
+
