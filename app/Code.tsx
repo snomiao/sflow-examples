@@ -18,18 +18,21 @@ export default function Code({
   useEffect(() => {
     //
   }, [children]);
+  const runable = !children.match("sleep-promise|sflow/") && language.match(/typescript|javascript/i);
   return (
     <div className="flex flex-col gap-4">
       <ReactHighlightSyntax
-        language={language.replace("typescript", "TypeScript") as any}
-        // theme={'Base16Darcula'}
+        language={
+          language
+            .replace("typescript", "TypeScript")
+            .replace("javascript", "JavaScript") as any
+        }
         copy={true}
-        // copyBtnTheme={'Dark'}
       >
         {children}
       </ReactHighlightSyntax>
       <div>
-        {children.match("sleep-promise|sflow/") ? (
+        {!runable ? (
           <></> // skip
         ) : (
           <button
@@ -37,7 +40,10 @@ export default function Code({
               setOutput([]);
               const consoleLog = globalThis.console.log;
               globalThis.console.log = (...args) => {
-                setOutput((output) => [...output, args.map(e=> JSON.stringify(e, null, 2)).join(" ")]);
+                setOutput((output) => [
+                  ...output,
+                  args.map((e) => JSON.stringify(e, null, 2)).join(" "),
+                ]);
               };
               const code = children
                 // .replace(/console.log\((.*)\)/g, 'console.log("🚀", $1)')
@@ -64,7 +70,7 @@ export default function Code({
       {!!output.length && (
         <div>
           Outputs
-          <pre className="bg-gray-100 p-4">{output.join('\n')}</pre>
+          <pre className="bg-gray-100 p-4">{output.join("\n")}</pre>
         </div>
       )}
     </div>

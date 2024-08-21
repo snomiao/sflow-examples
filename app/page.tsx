@@ -5,7 +5,7 @@ import Code from "./Code";
 export default async function Home() {
   return (
     <div className="relative bg-gradient-radial min-h-screen flex flex-col items-center justify-center">
-      <div className="p-4 border-[6px] bg-white ">
+      <div className="p-4 border-[6px] bg-white m-4">
         <Markdown
           components={{
             h1: ({ node, children }) => (
