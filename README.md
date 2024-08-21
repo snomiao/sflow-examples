@@ -4,7 +4,7 @@ This document provides various examples and use cases to illustrate the features
 
 https://sflow-examples.vercel.app/
 
-- [sflow - npm]( https://www.npmjs.com/package/sflow )
+- [sflow - npm](https://www.npmjs.com/package/sflow)
 
 ## sflow Installlation
 
@@ -43,9 +43,7 @@ Chunk the stream into groups of three elements.
 import { sflow } from "sflow";
 
 async function example2() {
-  const result = await sflow([1, 2, 3, 4, 5, 6, 7, 8])
-    .chunk(3)
-    .toArray();
+  const result = await sflow([1, 2, 3, 4, 5, 6, 7, 8]).chunk(3).toArray();
 
   console.log(result); // Outputs: [[1, 2, 3], [4, 5, 6], [7, 8]]
 }
@@ -61,7 +59,7 @@ Debounce and throttle a stream of events.
 
 ```typescript
 import { sflow } from "sflow";
-const sleep = (ms) => new Promise(r=>setTimeout(r,ms))
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function example3() {
   const result = await sflow([1, 2, 3, 4, 5])
@@ -113,7 +111,7 @@ import { csvParses, csvFormats } from "sflow/xsvStreams";
 
 async function example5() {
   const csvData = "name,age\nJohn,30\nJane,25";
-  
+
   const result = await sflow(csvData)
     .through(csvParses("name,age"))
     .map((record) => ({ ...record, age: Number(record.age) }))
@@ -139,7 +137,7 @@ import { sflow } from "sflow";
 async function example6() {
   const data = [
     { id: 1, values: [10, 20, 30] },
-    { id: 2, values: [40, 50] }
+    { id: 2, values: [40, 50] },
   ];
 
   const result = await sflow(data)
@@ -148,7 +146,7 @@ async function example6() {
     .toArray();
 
   console.log(result);
-  // Outputs: 
+  // Outputs:
   // [
   //   { id: 1, values: 10 },
   //   { id: 1, values: 20 },
@@ -169,14 +167,17 @@ Use `pMap` for processing stream items concurrently.
 
 ```typescript
 import { sflow } from "sflow";
-const sleep = (ms) => new Promise(r=>setTimeout(r,ms))
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function example7() {
   const result = await sflow([1, 2, 3, 4])
-    .pMap(async (n) => {
-      await sleep(n * 100); // Simulate async work
-      return n * 2;
-    }, { concurrency: 2 })
+    .pMap(
+      async (n) => {
+        await sleep(n * 100); // Simulate async work
+        return n * 2;
+      },
+      { concurrency: 2 }
+    )
     .log() // Prints: 2, 4, 6, 8
     .toArray();
 
@@ -199,7 +200,7 @@ import { reduceEmits } from "sflow/reduceEmits";
 async function example8() {
   const reducer = (sum, value) => ({
     next: sum + value,
-    emit: sum + value
+    emit: sum + value,
   });
 
   const result = await sflow([1, 2, 3, 4])
@@ -225,7 +226,7 @@ import { lines } from "sflow/lines";
 
 async function example9() {
   const text = "line1\nline2\nline3";
-  
+
   const result = await sflow(text)
     .through(lines())
     .map((line) => line.toUpperCase())
@@ -286,7 +287,7 @@ async function example11() {
   const data = [
     { category: "A", value: 10 },
     { category: "B", value: 20 },
-    { category: "A", value: 5 }
+    { category: "A", value: 5 },
   ];
 
   const reducer = (acc, { category, value }) => {
@@ -300,7 +301,7 @@ async function example11() {
     .toArray();
 
   console.log(result);
-  // Outputs: 
+  // Outputs:
   // [
   //   { "A": 10 },
   //   { "A": 10, "B": 20 },
@@ -403,7 +404,7 @@ async function example15() {
 
   const customReducer = (sum, value) => ({
     next: sum + value,
-    emit: sum + value * 2
+    emit: sum + value * 2,
   });
 
   const result = await sflow(data)
@@ -425,7 +426,7 @@ Hold sequential waiting on async operation in stream.
 
 ```typescript
 import { sflow } from "sflow";
-const sleep = (ms) => new Promise(r=>setTimeout(r,ms))
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function example16() {
   const data = [1, 2, 3, 4];
@@ -456,7 +457,7 @@ import { tsvParses, tsvFormats } from "sflow/xsvStreams";
 
 async function example17() {
   const tsvData = "name\tage\nJohn\t30\nJane\t25";
-  
+
   const result = await sflow(tsvData)
     .through(tsvParses("name\tage"))
     .map((record) => ({ ...record, age: Number(record.age) + 1 }))
@@ -509,7 +510,7 @@ Buffer stream items within a time interval.
 ```typescript
 import { sflow } from "sflow";
 import { chunkIntervals } from "sflow/chunkIntervals";
-const sleep = (ms) => new Promise(r=>setTimeout(r,ms))
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function example19() {
   const result = await sflow([1, 2, 3, 4])
@@ -537,7 +538,7 @@ async function example20() {
   const uppercaseTransform = new TransformStream({
     transform(chunk, controller) {
       controller.enqueue(chunk.toUpperCase());
-    }
+    },
   });
 
   const result = await sflow(["hello", "world"])
@@ -553,13 +554,44 @@ await example20();
 console.log("🚀", "Done");
 ```
 
+## Example Basic: Using TransformStream for Custom Transformations
+
+Implement a custom transformation using `TransformStream`.
+
+```typescript
+import { sflow } from "sflow";
+
+async function run() {
+  let result = await sflow([1, 2, 3, 4])
+    .map((n) => n * 2)
+    .log((e) => "stage 1 - " + e) // this stage prints 2, 4, 6, 8
+    .filter((n) => n > 4)
+    .log((e) => "stage 2 - " + e) // this stage prints 6, 8
+    .reduce((a, b) => a + b, 0) // first emit 0+6=6, second emit 0+6+8=14
+    .log((e) => "stage 3 - " + e) // this stage prints 6, 14
+    .toArray();
+
+  console.log(result); // Outputs: [6, 14]
+}
+
+await run();
+// "stage 1 - 2"    
+// "stage 1 - 4"    
+// "stage 1 - 6"    
+// "stage 2 - 6"    // 2, 4 is filtered out in stage 2
+// "stage 1 - 8"    
+// "stage 3 - 6"    // 0+6
+// "stage 2 - 8"    
+// "stage 3 - 14"   // 0+6+8
+// [  6,  14  ]     // results
+```
 
 ## Contribution
 
-1. All PR's and issues welcome! Press `.` in the example repo, and edit as you want, then create 
+1. All PR's and issues welcome! Press `.` in the example repo, and edit as you want, then create
 
 Try to create your first PR here! https://github.dev/snomiao/sflow-examples
 
 2. Join sflow Community by Post Comments here:
 
-- [Welcome to sflow Discussions! · snomiao/sflow · Discussion #2]( https://github.com/snomiao/sflow/discussions/2 )
+- [Welcome to sflow Discussions! · snomiao/sflow · Discussion #2](https://github.com/snomiao/sflow/discussions/2)
