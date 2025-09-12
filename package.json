@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@types/react-syntax-highlighter": "^15.5.13",
-    "next": "14.2.5",
+    "next": "14.2.30",
     "react": "^18",
     "react-dom": "^18",
     "react-highlight-syntax": "^1.2.1",
